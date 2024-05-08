@@ -1,0 +1,93 @@
+{% load static %}
+
+<header>
+    <nav class="bg-slate-400 dark:bg-slate-700 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <a href="/" class="flex items-center">
+                <img src="{% static 'speechdb/dices-logo.png' %}" alt="DICES logo" width="100" height="100" class="pr-4">
+                <span class="hidden sm:block self-center text-xl font-semibold whitespace-nowrap dark:text-white">Digital Initiative for Classics: Epic Speeches</span>
+                <span class="block sm:hidden self-center text-xl font-semibold whitespace-nowrap dark:text-white">DICES</span>
+            </a>
+            <div class="flex items-center lg:order-2">
+                <button 
+                    data-collapse-toggle="mobile-menu-2" 
+                    type="button" 
+                    class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" 
+                    aria-controls="mobile-menu-2" 
+                    aria-expanded="{% if is_open %}true{% else %}false{% endif %}"
+                    onclick="toggleMobileMenu()"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    {% if is_open %}
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    {% else %}
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                    {% endif %}
+                </button>
+            </div>
+            <div class="lg:flex lg:w-auto lg:order-1 justify-between items-center w-full" id="mobile-menu-2">
+                <ul class="flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    <li>
+                        <a href="/" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                    </li>
+                    <li>
+                        <button onclick="toggleDatabaseMenu()" class="w-full text-left block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                            Search Database
+                        </button>
+                        <ul id="database-menu-small" class="{% if is_database_open %}block{% else %}hidden{% endif %} lg:hidden bg-slate-300 dark:bg-slate-600 flex flex-col mt-1">
+                            <li><a href="{% url 'app:speeches' %}" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Speeches</a></li>
+                            <li><a href="{% url 'app:clusters' %}" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Speech Clusters</a></li>
+                            <li><a href="{% url 'app:characters' %}" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Characters</a></li>
+                            <li><a href="{% url 'app:instances' %}" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Character Instances</a></li>
+                            <li><a href="{% url 'app:authors' %}" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Authors</a></li>
+                            <li><a href="{% url 'app:works' %}" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Works</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="database-menu-large" class="{% if is_database_open %}lg:flex lg:flex-row hidden{% else %}hidden{% endif %} drop-shadow-lg justify-center items-center bg-slate-300 dark:bg-slate-600 w-full">
+        <ul class="justify-between bg-slate-300 dark:bg-slate-600 flex flex-row divide-x">
+            <li><a href="{% url 'app:speeches' %}" class="block px-2 py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Speeches</a></li>
+            <li><a href="{% url 'app:clusters' %}" class="block px-2 py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Speech Clusters</a></li>
+            <li><a href="{% url 'app:characters' %}" class="block px-2 py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Characters</a></li>
+            <li><a href="{% url 'app:instances' %}" class="block px-2 py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Character Instances</a></li>
+            <li><a href="{% url 'app:authors' %}" class="block px-2 py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Authors</a></li>
+            <li><a href="{% url 'app:works' %}" class="block px-2 py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Works</a></li>
+        </ul>
+    </div>
+</header>
+
+<script>
+    function toggleMobileMenu() {
+        var mobileMenu = document.getElementById('mobile-menu-2');
+        mobileMenu.classList.toggle('hidden');
+    }
+
+    function toggleDatabaseMenu() {
+        var databaseMenuSmall = document.getElementById('database-menu-small');
+        var databaseMenuLarge = document.getElementById('database-menu-large');
+        if (window.innerWidth <= 640) {
+            databaseMenuSmall.classList.toggle('hidden');
+            databaseMenuLarge.classList.add('hidden'); // Close large menu
+        } else {
+            databaseMenuLarge.classList.toggle('hidden');
+            databaseMenuSmall.classList.add('hidden'); // Close small menu
+        }
+    }
+
+    window.addEventListener('resize', function() {
+        var windowWidth = window.innerWidth;
+        if (windowWidth <= 640) {
+            var databaseMenuLarge = document.getElementById('database-menu-large');
+            databaseMenuLarge.classList.add('hidden');
+        } else {
+            var databaseMenuSmall = document.getElementById('database-menu-small');
+            databaseMenuSmall.classList.add('hidden');
+        }
+    });
+</script>
