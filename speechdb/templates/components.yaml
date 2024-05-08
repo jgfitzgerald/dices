@@ -1,0 +1,3 @@
+components:
+  header: "speechdb/components/header.html"
+  footer: "speechdb/components/footer.html"
