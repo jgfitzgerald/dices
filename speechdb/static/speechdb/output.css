@@ -595,28 +595,24 @@ video {
   margin-inline-end: 0.5rem;
 }
 
-.ms-5 {
-  margin-inline-start: 1.25rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
+.me-4 {
+  margin-inline-end: 1rem;
 }
 
 .ml-1 {
   margin-left: 0.25rem;
 }
 
+.ms-5 {
+  margin-inline-start: 1.25rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
 
-.me-4 {
-  margin-inline-end: 1rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .block {
