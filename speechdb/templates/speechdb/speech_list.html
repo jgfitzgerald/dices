@@ -3,7 +3,7 @@
 {% block title %}Speeches{% endblock %}
 
 {% block results %}
-<table class="table table-striped">
+<table class="table table-striped mb-5">
   <thead>
     <tr>
       <th>Locus</th>
@@ -71,7 +71,7 @@
 
 {% block sidebar_content %}
 <form action="{% url 'app:speeches' %}" method="GET">
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header" id="hdr_speaker">
       <span>Speaker</span>
     </div>
@@ -79,7 +79,7 @@
       <div class="row">
         <div class="col">
           <label for="sel_spkr">Named Characters</label>
-          <select class="form-control form-control-sm" id="sel_spkr" name="spkr_id">
+          <select class="select2 form-control form-control-sm" id="sel_spkr" name="spkr_id">
             <option value="">-----</option>
             {% for c in characters %}
             <option value="{{ c.pk }}" {% if params.spkr_id == c.pk %} selected="selected" {% endif %} >{{ c.name }}</option>
@@ -90,7 +90,7 @@
       <div class="row mt-2">
         <div class="col">
           <label for="sel_spkr_inst">Anonymous/Collectives</label>
-          <select class="form-control form-control-sm" id="sel_spkr_inst" name="spkr_inst_name">
+          <select class="select2 form-control form-control-sm" id="sel_spkr_inst" name="spkr_inst_name">
             <option value="">-----</option>
             {% for name in anons %}
             <option value="{{ name }}" {% if params.spkr_inst_name == name %} selected="selected" {% endif %} >{{ name }}</option>
@@ -133,7 +133,7 @@
       </div>
     </div>
   </div>
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header" id="hdr_addressee">
       <span>Addressee</span>
     </div>
@@ -141,7 +141,7 @@
       <div class="row">
         <div class="col">
           <label for="sel_addr">Named Characters</label>
-          <select class="form-control form-control-sm" id="sel_addr" name="addr_id">
+          <select class="select2 form-control form-control-sm" id="sel_addr" name="addr_id">
             <option value="">-----</option>
             {% for c in characters %}
             <option value="{{ c.pk }}" {% if params.addr_id == c.pk %} selected="selected" {% endif %} >{{ c.name }}</option>
@@ -152,7 +152,7 @@
       <div class="row mt-2">
         <div class="col">
           <label for="sel_addr_inst">Anonymous/Collectives</label>
-          <select class="form-control form-control-sm" id="sel_addr_inst" name="addr_inst_name">
+          <select class="select2 form-control form-control-sm" id="sel_addr_inst" name="addr_inst_name">
             <option value="" selected="selected">-----</option>
             {% for name in anons %}
             <option value="{{ name }}" {% if params.addr_inst_name == name %} selected="selected" {% endif %}>{{ name }}</option>
@@ -195,7 +195,7 @@
       </div>
     </div>
   </div>
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header">
       <span>Conversation properties</span>
     </div>
@@ -217,7 +217,7 @@
         <div class="col">
           <div class="form-group">
             <label for="sel_tags">Tags</label>
-            <select class="form-control form-control-sm" id="sel_tags" name="tags">
+            <select class="multiple-tag form-control form-control-sm" id="sel_tags" name="tags" multiple="multiple">
               <option value="">-----</option>
               {% for k, v in tag_choices %}
               <option value="{{ k }}" {% if params.tags == k %} selected="selected" {% endif %} ">{{ v }}</option>
@@ -252,7 +252,7 @@
       </div>
     </div>
   </div>
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header">
       <span>Text properties</span>
     </div>
@@ -268,14 +268,14 @@
               {% endfor %}
             </select>
             <label for="sel_auth">Author</label>
-            <select class="form-control form-control-sm" id="sel_auth" name="auth_id">
+            <select class="select2 form-control form-control-sm" id="sel_auth" name="auth_id">
               <option value="" selected="selected">-----</option>
               {% for a in authors %}
               <option value="{{ a.pk }}" {% if params.auth_id == a.pk %} selected="selected" {% endif %}>{{ a.name }}</option>
               {% endfor %}
             </select>
             <label for="sel_work">Work</label>
-            <select class="form-control form-control-sm" id="sel_work" name="work_id">
+            <select class="select2 form-control form-control-sm" id="sel_work" name="work_id">
               <option value="" selected="selected">-----</option>
               {% for w in works %}
               <option value="{{ w.pk }}" {% if params.work_id == w.pk %} selected="selected" {% endif %}>{{ w.get_long_name }}</option>
@@ -293,4 +293,12 @@
     </div>
   </div>
 </form>
+
+<script>
+  $(document).ready(function() {
+      $('.select2').select2({ width: '100%' });
+      $('.multiple-tag').select2({ width: '100%' });
+  });
+</script>
+
 {% endblock %}

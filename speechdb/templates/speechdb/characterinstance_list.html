@@ -58,7 +58,7 @@
     </div>
     <div class="card-body">
       <label for="sel_char_name">Name</label>
-      <select class="form-control form-control-sm" id="sel_name" name="name">
+      <select class="select2 form-control form-control-sm" id="sel_name" name="name">
         <option value="">-----</option> 
         {% for name in names %}
         <option value="{{ name }}" {% if params.name == name %} selected="selected" {% endif %}>{{ name }}</option>
@@ -99,7 +99,7 @@
     </div>
     <div class="card-body">
       <label for="sel_char_name">Name</label>
-      <select class="form-control form-control-sm" id="sel_char_name" name="char_name">
+      <select class="select2 form-control form-control-sm" id="sel_char_name" name="char_name">
         <option value="">-----</option> 
         {% for c in characters %}
         <option value="{{ c.name }}" {% if params.char_name == c.name %} selected="selected" {% endif %}>{{ c.name }}</option>
@@ -135,4 +135,11 @@
     </div>
   </div>
 </form>
+
+<script>
+  $(document).ready(function() {
+      $('.select2').select2({ width: '100%' });
+      $('.multiple-tag').select2({ width: '100%' });
+  });
+</script>
 {% endblock %}

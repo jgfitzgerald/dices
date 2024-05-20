@@ -48,7 +48,7 @@
     </div>
     <div class="card-body">
       <label for="sel_author">Author</label>
-      <select class="form-control form-control-sm" id="sel_auth_id" name="auth_id">
+      <select class="select2 form-control form-control-sm" id="sel_auth_id" name="auth_id">
         <option value="">-----</option> 
         {% for a in authors %}
         <option value="{{ a.id }}" {% if params.auth_id == a.id %} selected="selected" {% endif %}>{{ a.name }}</option>
@@ -70,4 +70,12 @@
     </div>
   </div>
 </form>
+
+<script>
+  $(document).ready(function() {
+      $('.select2').select2({ width: '100%' });
+      $('.multiple-tag').select2({ width: '100%' });
+  });
+</script>
+
 {% endblock %}

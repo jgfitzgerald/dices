@@ -112,14 +112,14 @@
                 {% endfor %}
               </select>
               <label for="sel_auth">Author</label>
-              <select class="form-control form-control-sm" id="sel_auth" name="auth_id">
+              <select class="select2 form-control form-control-sm" id="sel_auth" name="auth_id">
                 <option value="">-----</option>
                 {% for a in authors %}
                 <option value="{{ a.pk }}" {% if params.auth_id == a.pk %} selected="selected" {% endif %}>{{ a.name }}</option>
                 {% endfor %}
               </select>
               <label for="sel_work">Work</label>
-              <select class="form-control form-control-sm" id="sel_work" name="work_id">
+              <select class="select2 form-control form-control-sm" id="sel_work" name="work_id">
                 <option value="">-----</option>
                 {% for w in works %}
                 <option value="{{ w.pk }}" {% if params.work_id == w.pk %} selected="selected" {% endif %}>{{ w.get_long_name }}</option>
@@ -138,4 +138,12 @@
     </div>
   </div>
 </form>
+
+<script>
+  $(document).ready(function() {
+      $('.select2').select2({ width: '100%' });
+      $('.multiple-tag').select2({ width: '100%' });
+  });
+</script>
+
 {% endblock %}
