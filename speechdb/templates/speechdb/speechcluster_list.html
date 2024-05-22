@@ -36,7 +36,7 @@
 {% block sidebar_content %}
 <form action="{% url 'app:clusters' %}" method="GET">
   <div class="form-group">
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header" id="hdr_speaker">
       <span>Speaker</span>
     </div>
@@ -44,8 +44,6 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <div class="row">
-              <div class="col">
                 <label for="sel_spkr">Named Characters</label>
                 <select class="select2 form-control form-control-sm" id="sel_spkr" name="spkr_id">
                   <option value="">-----</option>
@@ -53,8 +51,6 @@
                   <option value="{{ c.pk }}" {% if params.spkr_id == c.pk %} selected="selected" {% endif %}>{{ c.name }}</option>
                   {% endfor %}
                 </select>
-              </div>
-              <div class="col">
                 <label for="sel_spkr_inst">Anonymous/Collectives</label>
                 <select class="select2 form-control form-control-sm" id="sel_spkr_inst" name="spkr_inst_name">
                   <option value="">-----</option>
@@ -62,10 +58,6 @@
                   <option value="{{ name }}" {% if params.spkr_inst_name == name %} selected="selected" {% endif %}>{{ name }}</option>
                   {% endfor %}
                 </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
                 <label for="sel_spkr_being">Being</label>
                 <select class="form-control form-control-sm" id="sel_spkr_being" name="spkr_being">
                   <option value="">-----</option>
@@ -73,8 +65,6 @@
                   <option value="{{ k }}" {% if params.spkr_being == k %} selected="selected" {% endif %}>{{ v }}</option>
                   {% endfor %}                      
                 </select>
-              </div>
-              <div class="col">
                 <label for="sel_spkr_gender">Gender</label>
                 <select class="form-control form-control-sm" id="sel_spkr_gender" name="spkr_gender">
                   <option value="">-----</option>
@@ -82,8 +72,6 @@
                   <option value="{{ k }}" {% if params.spkr_gender == k %} selected="selected" {% endif %}>{{ v }}</option>
                   {% endfor %}                                            
                 </select>
-              </div>
-              <div class="col">
                 <label for="sel_spkr_number">Number</label>
                 <select class="form-control form-control-sm" id="sel_spkr_number" name="spkr_number">
                   <option value="">-----</option>
@@ -91,23 +79,19 @@
                   <option value="{{ k }}" {% if params.spkr_number == k %} selected="selected" {% endif %}>{{ v }}</option>
                   {% endfor %}
                 </select>
-              </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header" id="hdr_addressee">
       <span>Addressee</span>
     </div>
     <div class="card-body" id="collapse_addressee" aria-labelledby="hdr_addressee">
       <div class="row">
         <div class="col">
-          <div class="form-group">
-            <div class="row">
-              <div class="col">              
+          <div class="form-group">      
                 <label for="sel_addr">Named Characters</label>
                 <select class="select2 form-control form-control-sm" id="sel_addr" name="addr_id">
                   <option value="">-----</option>
@@ -115,8 +99,6 @@
                   <option value="{{ c.pk }}" {% if params.addr_id == c.pk %} selected="selected" {% endif %}>{{ c.name }}</option>
                   {% endfor %}
                 </select>
-              </div>
-              <div class="col">
                 <label for="sel_addr_inst">Anonymous/Collectives</label>
                 <select class="select2 form-control form-control-sm" id="sel_addr_inst" name="addr_inst_name">
                   <option value="">-----</option>
@@ -124,10 +106,6 @@
                   <option value="{{ name }}" {% if params.addr_inst_name == name %} selected="selected" {% endif %}>{{ name }}</option>
                   {% endfor %}
                 </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
                 <label for="sel_addr_being">Being</label>
                 <select class="form-control form-control-sm" id="sel_addr_being" name="addr_being">
                   <option value="">-----</option>
@@ -135,8 +113,6 @@
                   <option value="{{ k }}" {% if params.addr_being == k %} selected="selected" {% endif %}>{{ v }}</option>
                   {% endfor %}                                            
                 </select>
-              </div>
-              <div class="col">
                 <label for="sel_addr_gender">Gender</label>
                 <select class="form-control form-control-sm" id="sel_addr_gender" name="addr_gender">
                   <option value="">-----</option>
@@ -144,8 +120,6 @@
                   <option value="{{ k }}" {% if params.addr_gender == k %} selected="selected" {% endif %}>{{ v }}</option>
                   {% endfor %}
                 </select>
-              </div>
-              <div class="col">
                 <label for="sel_addr_number">Number</label>
                 <select class="form-control form-control-sm" id="sel_addr_number" name="addr_number">
                   <option value="">-----</option>
@@ -153,14 +127,12 @@
                   <option value="{{ k }}" {% if params.addr_number == k %} selected="selected" {% endif %}>{{ v }}</option>
                   {% endfor %}                      
                 </select>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header">
       <span>Conversation properties</span>
     </div>
@@ -177,16 +149,14 @@
             </select>
           </div>
         </div>
-        <div class="col">
           <div class="form-group">
             <label for="sel_n_parts">Total parts in cluster: </label>
             <input type="number" id="sel_n_parts" name="n_parts" min="1" max="{{ max_parts }}" {% if params.n_parts %} value="{{ params.n_parts }}" {% endif %}>
           </div>
-        </div>
       </div>
     </div>
   </div>
-  <div class="card small">
+  <div class="card small my-2">
     <div class="card-header">
       <span>Text properties</span>
     </div>
