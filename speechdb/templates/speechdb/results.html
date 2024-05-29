@@ -2,15 +2,16 @@
 
 {% block pagination %}
 
-<div class="btn-toolbar" role="toolbar">
-  <div class="btn-group btn-group-sm me-2" role="group">
+<div class="flex flex-wrap items-center justify-center">
+<div role="toolbar m-2">
+  <div class="btn-group btn-group-sm m-2" role="group">
     <a class="btn btn-outline-secondary" role="button" data-bs-toggle="collapse" data-bs-target="#collapseSidebar" aria-expanded="true" aria-controls="collapseSidebar">
     toggle filters
     </a>
   </div>
 </div>
-<div class="btn-toolbar" role="toolbar">
-  <div class="btn-group btn-group-sm" role="group">
+<div role="toolbar">
+  <div class="btn-group btn-group-sm m-2" role="group">
     <form class="row row-cols-lg-auto align-items-center">
       {% for k,v in params.items %}
         {% if k != 'page_size' %}
@@ -33,10 +34,11 @@
       </div>
     </form>
   </div>
+</div>
 
   {% if page_obj %}
 
-  <div class="btn-group btn-group-sm ms-5" role="group">
+  <div class="btn-group btn-group-sm" role="group">
     {% if page_obj.has_previous %}
     <a class="btn btn-outline-secondary" href="?page={{ page_obj.previous_page_number }}{% for k, v in params.items %}&{{ k }}={{ v }}{% endfor %}">Prev</a>
     {% else %}

@@ -1,22 +1,40 @@
-{% extends "speechdb/base_sidebar.html" %}
+{% extends "speechdb/base.html" %}
 
 {% block title %}DICES{% endblock %}
 {% block sidebar_title %}DICES{% endblock %}
-{% block sidebar_content %}
-<p>Database prototype</p>
-<ul>
-  <li><strong>{{ speeches.count }}</strong> speeches</li>
-  <li><strong>{{ characters.count }}</strong> characters</li>
-  <li><strong>{{ works.count }}</strong> texts</li>
-</ul>
 
-{% endblock %}
+{% block body %}
+<div class="d-flex align-items-center justify-content-center">
+<div class="w-75">
 
-{% block content %}
-<div class="jumbotron">
+<div class="d-flex align-items-center justify-content-center mb-2">
+        <div class="d-flex flex-wrap align-items-center justify-content-center">
+            <div class="mx-3 my-2 d-flex flex-column align-items-center justify-content-center mx-4">
+                <a href="{% url 'app:speeches' %}" class="d-flex flex-column align-items-center justify-content-center w-100 h-100 text-decoration-none">
+                    <div class="display-6 text-primary font-weight-bold">{{ speeches.count }}</div>
+                    <div class="text-secondary">Speeches</div>
+                </a>
+            </div>
+            <div class="mx-3 my-2 d-flex flex-column align-items-center justify-content-center mx-4">
+                <a href="{% url 'app:characters' %}" class="d-flex flex-column align-items-center justify-content-center w-100 h-100 text-decoration-none">
+                    <div class="display-6 text-primary font-weight-bold">{{ characters.count }}</div>
+                    <div class="text-secondary">Characters</div>
+                </a>
+            </div>
+            <div class="mx-3 my-2 d-flex flex-column align-items-center justify-content-center mx-4">
+                <a href="{% url 'app:works' %}" class="d-flex flex-column align-items-center justify-content-center w-100 h-100 text-decoration-none">
+                    <div class="display-6 text-primary font-weight-bold">{{ works.count }}</div>
+                    <div class="text-secondary">Texts</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="py-2">
+
   <h5>A Database of Direct Speech in Greek and Latin Epic from Homer to Late Antiquity</h5>
     
-  <div style="margin: 2em 0em">
+  <div class="my-4">
     <p><strong>Principal Investigators</strong></p>
     <ul style="list-style-type:none; margin:0; padding:0">
       <li>Christopher Forstall, Mount Allison University, Canada</li>
@@ -73,5 +91,6 @@
       </li>
     </ul>
   </div>
+</div>
 </div>
 {% endblock %}
