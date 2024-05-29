@@ -1,6 +1,6 @@
 function toggleMobileMenu() {
     var mobileMenu = document.getElementById('mobile-menu-2');
-    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('tw-hidden');
 }
 
 function toggleDatabaseMenu() {
@@ -8,11 +8,11 @@ function toggleDatabaseMenu() {
     var databaseMenuSmall = document.getElementById('database-menu-small');
     var databaseMenuLarge = document.getElementById('database-menu-large');
     if (windowWidth < 1024) {
-        databaseMenuLarge.classList.add('hidden');
-        databaseMenuSmall.classList.toggle('hidden');
+        databaseMenuLarge.classList.add('tw-hidden');
+        databaseMenuSmall.classList.toggle('tw-hidden');
     } else {
-        databaseMenuSmall.classList.add('hidden');
-        databaseMenuLarge.classList.toggle('hidden');
+        databaseMenuSmall.classList.add('tw-hidden');
+        databaseMenuLarge.classList.toggle('tw-hidden');
     }
 }
 
@@ -20,9 +20,9 @@ window.addEventListener('resize', function() {
     var windowWidth = window.innerWidth;
     if (windowWidth < 1024) {
         var databaseMenuLarge = document.getElementById('database-menu-large');
-        databaseMenuLarge.classList.add('hidden');
+        databaseMenuLarge.classList.add('tw-hidden');
     } else {
         var databaseMenuSmall = document.getElementById('database-menu-small');
-        databaseMenuSmall.classList.add('hidden');
+        databaseMenuSmall.classList.add('tw-hidden');
     }
 });

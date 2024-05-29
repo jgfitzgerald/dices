@@ -24,63 +24,53 @@
   <body class="d-flex flex-column vh-100">
   
   <header>
-    <nav class="bg-slate-400 dark:bg-slate-700 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <div class="flex flex-wrap justify-content-between align-items-center mx-auto max-w-screen-xl">
-            <a href="/" class="d-flex align-items-center">
-                <img src="{% static 'speechdb/dices-logo.png' %}" alt="DICES logo" width="100" height="100" class="pr-4">
-                <span class="hidden sm:block align-self-center text-xl font-semibold whitespace-nowrap dark:text-white">Digital Initiative for Classics: Epic Speeches</span>
-                <span class="block sm:hidden align-self-center text-xl font-semibold whitespace-nowrap dark:text-white">DICES</span>
-            </a>
-            <div class="d-flex align-items-center lg:order-2">
-                <button 
-                    data-collapse-toggle="mobile-menu-2" 
-                    type="button" 
-                    class="inline-flex align-items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" 
-                    aria-controls="mobile-menu-2" 
-                    aria-expanded="{% if is_open %}true{% else %}false{% endif %}"
-                    onclick="toggleMobileMenu()"
-                >
-                    <span class="sr-only">Open main menu</span>
-                    {% if is_open %}
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    {% else %}
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                    {% endif %}
-                </button>
-            </div>
-            <div class="lg:flex lg:w-auto lg:order-1 justify-content-between align-items-center w-full" id="mobile-menu-2">
-                <ul class="flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                    <li>
-                        <a href="/" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
-                    </li>
-                    <li>
-                        <a href="/about" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                    </li>
-                    <li>
-                        <button id="databaseButton" onclick="toggleDatabaseMenu()" class="w-full text-left block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 flex items-center justify-between">
-                        Search Database <i class="fa-solid fa-chevron-down ml-2"></i>
-                    </button>
-                    <ul id="database-menu-small" class="{% if is_database_open %}block{% else %}hidden{% endif %} lg:hidden bg-slate-300 dark:bg-slate-600 flex flex-col mt-1 font-medium transition-all duration-300 ease-in-out">
-                        <a href="{% url 'app:speeches' %}"><li class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Speeches</li></a>
-                        <a href="{% url 'app:clusters' %}"><li class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Speech Clusters</li></a>
-                        <a href="{% url 'app:characters' %}"><li class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Characters</li></a>
-                        <a href="{% url 'app:instances' %}"><li class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Character Instances</li></a>
-                        <a href="{% url 'app:authors' %}"><li class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Authors</li></a>
-                        <a href="{% url 'app:works' %}"><li class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Works</li></a>
-                    </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div id="database-menu-large" class="flex hidden drop-shadow-lg justify-center items-center bg-slate-300 dark:bg-slate-600 w-full">
-        <ul class="font-medium justify-center bg-slate-300 dark:bg-slate-600 flex flex-row divide-x">
-            <a class="hover:bg-gray-50 dark:hover:bg-gray-800" href="{% url 'app:speeches' %}"><li class="block px-5 py-2 text-gray-700">Speeches</li></a>
-            <a class="hover:bg-gray-50 dark:hover:bg-gray-800"  href="{% url 'app:clusters' %}"><li class="block px-5 py-2 text-gray-700">Speech Clusters</li></a>
-            <a class="hover:bg-gray-50 dark:hover:bg-gray-800"  href="{% url 'app:characters' %}"><li class="block px-5 py-2 text-gray-700">Characters</li></a>
-            <a class="hover:bg-gray-50 dark:hover:bg-gray-800"  href="{% url 'app:instances' %}"><li class="block px-5 py-2 text-gray-700">Character Instances</li></a>
-            <a class="hover:bg-gray-50 dark:hover:bg-gray-800"  href="{% url 'app:authors' %}"><li class="block px-5 py-2 text-gray-700">Authors</li></a>
-            <a class="hover:bg-gray-50 dark:hover:bg-gray-800"  href="{% url 'app:works' %}"><li class="block px-5 py-2 text-gray-700">Works</li></a>
+    <nav class="tw-bg-slate-400 dark:tw-bg-slate-700 px-4 lg:px-6 py-2">
+      <div class="tw-flex tw-flex-wrap tw-justify-between tw-items-center mx-auto tw-max-w-screen-xl">
+          <a href="/" class="tw-flex tw-items-center">
+              <img src="/static/speechdb/dices-logo.png" alt="DICES logo" width="100" height="100" class="tw-pr-4">
+              <span class="tw-hidden sm:tw-block tw-text-xl tw-font-semibold tw-whitespace-nowrap dark:tw-text-white">Digital Initiative for Classics: Epic Speeches</span>
+              <span class="tw-block sm:tw-hidden tw-text-xl tw-font-semibold tw-whitespace-nowrap dark:tw-text-white">DICES</span>
+          </a>
+          <div class="tw-flex tw-items-center lg:tw-order-2">
+              <button data-collapse-toggle="mobile-menu-2" type="button" class="tw-inline-flex tw-ml-1 tw-text-sm tw-text-gray-500 tw-rounded-lg lg:tw-hidden hover:tw-bg-gray-100 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-gray-200 dark:tw-text-gray-400 dark:hover:tw-bg-gray-700 dark:focus:tw-ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false" onclick="toggleMobileMenu()">
+                  <span class="tw-sr-only">Open main menu</span>
+                  <svg class="tw-w-6 tw-h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+              </button>
+          </div>
+          <div class="tw-hidden tw-w-full lg:tw-flex lg:tw-w-auto lg:tw-order-1" id="mobile-menu-2">
+              <ul class="tw-flex tw-flex-col tw-font-medium lg:tw-flex-row lg:tw-space-x-8 lg:tw-mt-0">
+                  <li>
+                      <a href="/" class="tw-block py-2 pr-4 pl-3 tw-text-gray-700 tw-border-b tw-border-gray-100 lg:hover:tw-text-primary-700 lg:tw-p-0 dark:tw-text-gray-400 lg:dark:hover:tw-text-white dark:hover:tw-text-white dark:tw-border-gray-700" aria-current="page">Home</a>
+                  </li>
+                  <li>
+                      <a href="/about" class="tw-block py-2 pr-4 pl-3 tw-text-gray-700 tw-border-b tw-border-gray-100 lg:hover:tw-text-primary-700 lg:tw-p-0 dark:tw-text-gray-400 lg:dark:hover:tw-text-white dark:hover:tw-text-white dark:tw-border-gray-700">About</a>
+                  </li>
+                  <li class="tw-relative">
+                      <button id="databaseButton" onclick="toggleDatabaseMenu()" class="tw-w-full tw-text-left tw-block py-2 pr-4 pl-3 tw-text-gray-700 tw-border-b tw-border-gray-100 lg:tw-border-0 lg:hover:tw-text-primary-700 lg:tw-p-0 dark:tw-text-gray-400 lg:dark:hover:tw-text-white dark:hover:tw-text-white dark:tw-border-gray-700 tw-flex tw-items-center tw-justify-between">
+                          Search Database 
+                          <svg class="tw-ml-2 tw-w-4 tw-h-4" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg>
+                      </button>
+                      <ul id="database-menu-small" class="tw-hidden lg:tw-hidden tw-bg-slate-300 dark:tw-bg-slate-600 tw-flex tw-flex-col tw-mt-1 tw-font-medium tw-transition-all tw-duration-300 tw-ease-in-out">
+                          <li><a href="/app/speeches/" class="tw-block py-2 px-3 tw-text-gray-700 dark:tw-text-gray-300 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800">Speeches</a></li>
+                          <li><a href="/app/clusters/" class="tw-block py-2 px-3 tw-text-gray-700 dark:tw-text-gray-300 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800">Speech Clusters</a></li>
+                          <li><a href="/app/characters/" class="tw-block py-2 px-3 tw-text-gray-700 dark:tw-text-gray-300 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800">Characters</a></li>
+                          <li><a href="/app/instances/" class="tw-block py-2 px-3 tw-text-gray-700 dark:tw-text-gray-300 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800">Character Instances</a></li>
+                          <li><a href="/app/authors/" class="tw-block py-2 px-3 tw-text-gray-700 dark:tw-text-gray-300 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800">Authors</a></li>
+                          <li><a href="/app/works/" class="tw-block py-2 px-3 tw-text-gray-700 dark:tw-text-gray-300 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800">Works</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+    <div id="database-menu-large" class="tw-flex tw-hidden tw-drop-shadow-lg justify-content-center align-items-center tw-bg-slate-300 dark:tw-bg-slate-600 w-100">
+        <ul class="font-medium justify-center bg-slate-300 dark:bg-slate-600 dark:tw-text-white d-flex flex-row tw-divide-x">
+            <a class="hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800" href="{% url 'app:speeches' %}"><li class="tw-block px-5 py-2 tw-text-gray-700 dark:tw-text-gray-300">Speeches</li></a>
+            <a class="hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800"  href="{% url 'app:clusters' %}"><li class="tw-block px-5 py-2 tw-text-gray-700 dark:tw-text-gray-300">Speech Clusters</li></a>
+            <a class="hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800"  href="{% url 'app:characters' %}"><li class="tw-block px-5 py-2 tw-text-gray-700 dark:tw-text-gray-300">Characters</li></a>
+            <a class="hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800"  href="{% url 'app:instances' %}"><li class="tw-block px-5 py-2 tw-text-gray-700 dark:tw-text-gray-300">Character Instances</li></a>
+            <a class="hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800"  href="{% url 'app:authors' %}"><li class="tw-block px-5 py-2 tw-text-gray-700 dark:tw-text-gray-300">Authors</li></a>
+            <a class="hover:tw-bg-gray-50 dark:hover:tw-bg-gray-800"  href="{% url 'app:works' %}"><li class="tw-block px-5 py-2 tw-text-gray-700 dark:tw-text-gray-300">Works</li></a>
         </ul>
     </div>
   </header>
@@ -93,22 +83,22 @@
     <!-- Back to top button -->
     <button
         type="button"
-        class="btn btn-primary btn-floating btn-lg fixed hidden shadow rounded-circle"
+        class="btn btn-primary btn-floating btn-lg tw-fixed tw-hidden shadow rounded-circle"
         id="btn-back-to-top"
         style="bottom: 25px; right: 20px;"
         >
     <i class="fas fa-arrow-up"></i>
     </button>
 
-    <footer class="mt-auto w-100 bg-slate-400 dark:bg-slate-700 shadow dark:bg-gray-800">
-    <div class="w-100 mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-        <span class="text-sm text-gray-700 sm:text-center dark:text-gray-400">© 2024 <a href="https://www.dices.uni-rostock.de/en/about-dices/" class="hover:underline">DICES</a>. All Rights Reserved.</span>
-        <ul class="d-flex flex-wrap align-items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+    <footer class="mt-auto w-100 tw-bg-slate-400 dark:tw-bg-slate-700 shadow dark:tw-bg-gray-800">
+    <div class="w-100 mx-auto tw-max-w-screen-xl p-4 md:tw-flex md:tw-items-center md:tw-justify-between">
+        <span class="tw-text-sm tw-text-gray-700 sm:tw-text-center dark:tw-text-gray-400">© 2024 <a href="https://www.dices.uni-rostock.de/en/about-dices/" class="hover:tw-underline">DICES</a>. All Rights Reserved.</span>
+        <ul class="d-flex flex-wrap align-items-center tw-text-sm tw-font-medium tw-text-gray-500 dark:tw-text-gray-400 sm:tw-mt-0">
             <li>
-                <a href="https://opensource.org/license/mit" class="text-gray-700 hover:underline me-4 md:me-6">MIT License</a>
+                <a href="https://opensource.org/license/mit" class="hover:tw-underline me-4 md:me-6">MIT License</a>
             </li>
             <li>
-                <a href="https://github.com/cwf2/dices" class="text-gray-700 hover:underline">GitHub</a>
+                <a href="https://github.com/cwf2/dices" class="hover:tw-underline">GitHub</a>
             </li>
         </ul>
     </div>

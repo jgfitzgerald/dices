@@ -3,14 +3,14 @@
 {% block title %}Character Detail{% endblock %}
 
 {% block content %}
-<div class="flex items-center justify-center">
-<div style="border: 1px darkgrey solid; border-radius: 1rem;" class="bg-gray-300 w-4/5 py-5 px-2 mb-5">
-  <div class="w-full flex flex-col items-center justify-center">
-    <div class="w-4/5 flex flex-col">
+<div class="d-flex align-items-center justify-content-center">
+<div class="tw-w-4/5 py-5 px-2 mb-5">
+  <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="tw-w-4/5 d-flex flex-column">
       <div class="my-2"><h1 style="font-size: 1.5rem">{{ char.name }}</h1></div>
       <hr></hr>
         <div class="my-2">
-        <table class="table my-2 ml-3 [&>tbody>*:nth-child(odd)]:bg-transparent [&>tbody>*:nth-child(even)]:bg-gray-200">
+        <table class="table table-striped my-2 ml-3">
           <thead>
           </thead>
           <tbody>
@@ -86,11 +86,11 @@
       </table>
     </div>
   </div>    
-  <div class="w-4/5">
+  <div class="tw-w-4/5">
     <div class="my-2"><h1 style="font-size: 1.5rem">Instances</h1></div>
     <hr></hr>
       <div class="my-2">
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Name</th>
